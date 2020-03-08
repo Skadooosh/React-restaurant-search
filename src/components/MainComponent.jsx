@@ -61,6 +61,7 @@ function MainComponent() {
 
         } else {
             setListData(data)
+            dispatch(saveFilterData(data));
 
         }
 
