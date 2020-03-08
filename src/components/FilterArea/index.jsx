@@ -54,7 +54,6 @@ const FilterArea = () => {
                 }
             })
         }
-        
         dispatch(action.filterData(filterData))
     }, [selectedFilter])
 

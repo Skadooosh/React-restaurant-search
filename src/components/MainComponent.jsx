@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {fetchData} from './../actions/action'
+import {fetchData, saveFilterData} from './../actions/action'
 
 import FilterArea from './FilterArea'
 import ListCard from './ListCard';
 
 function MainComponent() {
     const dispatch = useDispatch();
-    const restaurantData = useSelector(state => state.restaurantData.data);
+    const restaurantData = useSelector(state => state.restaurantData.finalData);
+    const data = useSelector(state => state.restaurantData.data);
     const filterData = useSelector(state => state.restaurantData.filterData);
 
     const [listData,
@@ -22,7 +23,7 @@ function MainComponent() {
     }, [restaurantData])
 
     useEffect(() => {
-
+        console.log("Updateing")
         let shouldFilter = false;
 
         for (let key in filterData) {
@@ -31,7 +32,7 @@ function MainComponent() {
             }
         
         if (shouldFilter) {
-            let filteredData = [...restaurantData]
+            let filteredData = [...data]
 
             if (filterData["Brand"].length > 0) {
               const brands = filterData["Brand"];
@@ -56,9 +57,10 @@ function MainComponent() {
             }
 
             setListData(filteredData)
+            dispatch(saveFilterData(filteredData));
 
         } else {
-            setListData(restaurantData)
+            setListData(data)
 
         }
 

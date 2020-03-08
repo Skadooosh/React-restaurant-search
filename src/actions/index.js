@@ -7,3 +7,4 @@ export const SORT_BY_RATING = "SORT_BY_RATING";
 export const SORT_BY_YEAR = "SORT_BY_YEAR";
 
 export const FILTER_DATA = "FILTER_DATA";
+export const SAVE_FILTERED_DATA = "SAVE_FILTERED_DATA";

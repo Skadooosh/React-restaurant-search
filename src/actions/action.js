@@ -59,8 +59,17 @@ export const sortByYear = (order) => {
     }
 }
 export const filterData = (data) => {
+    
     return {
         type: actionTypes.FILTER_DATA,
+        payload: {
+            data
+        }
+    }
+}
+export const saveFilterData = (data) => {
+    return {
+        type: actionTypes.SAVE_FILTERED_DATA,
         payload: {
             data
         }

@@ -5,13 +5,13 @@ import {useDispatch} from 'react-redux';
 import './style.css'
 
 const ListCard = ({restaurantData}) => {
-
     const dispatch = useDispatch();
     const [searchValue,setSearchValue] = useState("");
     const [rData,setData] = useState(restaurantData);
 
+
     useEffect(() => {
-        setData(restaurantData)
+        setData(restaurantData);
     }, [restaurantData])
 
     useEffect(() => {

@@ -4,7 +4,8 @@ const initialState = {
     isFetching : false,
     hasFetched : false,
     data: [],
-    filterData: {}
+    filterData: {},
+    finalData: []
 }
 
 export function restaurantDataReducer (state = initialState, action) {
@@ -21,9 +22,9 @@ export function restaurantDataReducer (state = initialState, action) {
                     else
                         return 1;
             })
-            return {...state, isFetching: false, hasFetched: true, data: [...sortAtStart]}
+            return {...state, isFetching: false, hasFetched: true, data: [...sortAtStart], finalData: [...sortAtStart]}
         case actionTypes.SORT_BY_NAME:
-            const sortState = [...state.data];
+            const sortState = [...state.finalData];
             sortState.sort((first,second) => {
                 if(first.Brand < second.Brand)
                     return -1 * action.payload.order;
@@ -32,11 +33,11 @@ export function restaurantDataReducer (state = initialState, action) {
             })
             return {
                 ...state,
-                data: [...sortState]
+                finalData: [...sortState]
 
             }
         case actionTypes.SORT_BY_RATING:
-            const sortRating = [...state.data];
+            const sortRating = [...state.finalData];
             sortRating.forEach((rating,index) => {
                 if(isNaN(rating.Stars)) {
                     sortRating[index].Stars = 0;
@@ -47,11 +48,11 @@ export function restaurantDataReducer (state = initialState, action) {
 
             return {
                 ...state,
-                data: [...sortRating]
+                finalData: [...sortRating]
 
             }
         case actionTypes.SORT_BY_YEAR:
-            const sortYear = state.data.filter(e => e["Top Ten"] !== "NaN");
+            const sortYear = state.finalData.filter(e => e["Top Ten"] !== "NaN");
             
             sortYear.sort((first, second) => {
                 return(
@@ -64,18 +65,34 @@ export function restaurantDataReducer (state = initialState, action) {
                     parseInt(second["Top Ten"].split(" ")[0]) - parseInt(first["Top Ten"].split(" ")[0])
                 )
             })
-
-
-
             return {
                 ...state,
-                data: [...sortYear]
+                filterData: [...sortYear]
 
             }        
         case actionTypes.FILTER_DATA:
+            let isEmpty = true;
+            for(let key in action.payload.data) {
+                if(action.payload.data[key].length > 0)
+                    isEmpty = false
+            }
+
+            if(isEmpty) {
+                return {
+                    ...state,
+                    filterData: action.payload.data,
+                    finalData: [...state.data]
+                }
+            } else {
+                return {
+                    ...state,
+                    filterData: action.payload.data
+                }
+            }
+        case actionTypes.SAVE_FILTERED_DATA:
             return {
                 ...state,
-                filterData: action.payload.data
+                finalData: [...action.payload.data]
             }
         default:
             return state;
