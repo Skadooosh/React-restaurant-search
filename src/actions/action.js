@@ -1,4 +1,5 @@
 import * as actionTypes from './index';
+import data from './../api.json';
 
 export const fetchRequest = () => {
     return {
@@ -21,10 +22,9 @@ export const fetchData = () => {
     return async dispatch => {
         dispatch(fetchRequest());
         try {
-            let response = await fetch('http://starlord.hackerearth.com/TopRamen');
-            let json = await response.json();
-            console.log(json);
-            dispatch(fetchSuccess(json));
+            // let response = await fetch('url');
+            // let json = await response.json();
+            dispatch(fetchSuccess(data));
         } catch(err) {
             dispatch(fetchError());
         }
