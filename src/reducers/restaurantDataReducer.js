@@ -9,7 +9,7 @@ const initialState = {
 }
 
 export function restaurantDataReducer (state = initialState, action) {
-    console.log(action.type)
+    console.log(state.data)
     switch (action.type) {
         case actionTypes.FETCH_REQUEST:
             return {...state, isFetching: true}
@@ -18,7 +18,7 @@ export function restaurantDataReducer (state = initialState, action) {
         case actionTypes.FETCH_SUCCESS:
             const sortAtStart = [...action.payload].filter(e => e["Top Ten"] !== "NaN");
             const yearNotRated = [...action.payload].filter(e => e["Top Ten"] === "NaN");
-
+            console.log(action.payload,sortAtStart,yearNotRated)
             sortAtStart.sort((first, second) => {
                 return(
                     (parseInt(second["Top Ten"].split(" #")[1]) - parseInt(first["Top Ten"].split(" #")[1])) *-1 
@@ -31,7 +31,7 @@ export function restaurantDataReducer (state = initialState, action) {
                 )
             })
             
-            return {...state, isFetching: false, hasFetched: true, data: [...sortAtStart], finalData: [...sortAtStart,...yearNotRated]}
+            return {...state, isFetching: false, hasFetched: true, data: [...sortAtStart,...yearNotRated], finalData: [...sortAtStart,...yearNotRated]}
         case actionTypes.SORT_BY_NAME:
             const sortState = [...state.finalData];
             sortState.sort((first,second) => {
