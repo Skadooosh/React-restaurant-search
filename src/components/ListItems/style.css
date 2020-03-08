@@ -1,0 +1,53 @@
+.card-item {
+    border: 1px solid #fff;
+    margin: 10px;
+    width: 300px;
+    height: 300px;
+    align-self: center;
+    position: relative;
+    box-shadow: 2px 5px 4px #888888;
+    
+}
+
+img {
+    position: absolute;
+    left: 50%;
+    height: 150px;
+    transform: translate(-50%,0);
+    background-color: tomato;
+}
+
+.card-content {
+    position: relative;
+    top: 95%;
+    text-align: left;
+    padding-left: 20px;
+    transform: translate(0,-95%)
+}
+.dot {
+    height: 50px;
+    width: 50px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    right: 3%;
+  }
+
+  .dot span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      font-size: 0.9rem;
+  }
+
+  .checked {
+    color: orange;
+  }
+
+  .card-item:hover {
+      transform: scale(1.05,1.05);
+      border: 3px solid goldenrod;
+  }

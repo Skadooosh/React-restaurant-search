@@ -1,0 +1,8 @@
+header {
+    text-align: center;
+    border: 2px solid #ddd;
+    border-style: none none solid none;
+    background-color: tomato;
+    margin: 10px;
+    padding: 10px;
+}

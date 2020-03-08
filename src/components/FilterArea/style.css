@@ -1,0 +1,17 @@
+.filter-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100vh;
+    min-width: 200px;
+    margin-left: 10px;
+
+}
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px
+}
+ul {
+    margin-bottom: 20px;
+}
