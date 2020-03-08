@@ -67,7 +67,7 @@ export function restaurantDataReducer (state = initialState, action) {
             })
             return {
                 ...state,
-                filterData: [...sortYear]
+                finalData: [...sortYear]
 
             }        
         case actionTypes.FILTER_DATA:
